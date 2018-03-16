@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+// vim: ft=javascript
+const { createServer } = require('..')
+
+const Config = require('../lib/services/configuration-service')
+const logger = require('../lib/services/logger').logger()
+const bFormat = require('bunyan-format')
+const prettyStdout = bFormat({ outputMode: 'short' })
+
+const LOG_LEVEL = Config.get('LOG_LEVEL')
+logger.addStream({ stream: prettyStdout, level: LOG_LEVEL })
+
+createServer({ port: Config.get('PORT') })
+.then((server) => {
+  server.on('response', (request) => {
+    try {
+      const method = request.method.toUpperCase()
+      const path = request.url.path
+      const status = request.response.statusCode
+      const line = `${method} ${path} -> ${status}`
+      request.log.info(line)
+    } catch (e) {
+    }
+  })
+  return server.start()
+    .then(() => {
+      logger.info('server started on', server.info.uri)
+    })
+    .then(() => {
+      process.once('SIGTERM', () => {
+        server.stop()
+          .then(() => process.exit(0))
+      })
+    })
+}).catch(error => {
+  logger.fatal({ error }, 'Could not start server because of error %s. Exiting now, hoping for someone to restart', error.stack)
+  process.exit(10)
+})

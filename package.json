@@ -1,0 +1,41 @@
+{
+  "name": "very-hapi",
+  "version": "1.0.0",
+  "description": "Description goes here",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "tests": "tests"
+  },
+  "scripts": {
+    "start": "env PORT=3000 node-dev bin/start",
+    "test": "mocha tests && npm run test-style",
+    "test-style": "eslint --ignore-path .gitignore bin/* tests/"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.12",
+    "bunyan-format": "^0.2.1",
+    "h2o2": "^6.0.1",
+    "hapi": "^16.6.2",
+    "hapi-bunyan": "^0.7.0",
+    "hapi-require-https": "^2.1.0",
+    "hapi-swagger": "^7.8.1",
+    "inert": "^4.2.1",
+    "node-dev": "^3.1.3",
+    "stream-blackhole": "^1.0.3",
+    "superagent": "^3.8.2",
+    "superagent-defaults": "^0.1.14",
+    "vision": "^4.1.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-datetime": "^1.5.0",
+    "mocha": "^5.0.4",
+    "sinon": "^4.4.6",
+    "sinon-chai": "^3.0.0",
+    "supertest": "^3.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

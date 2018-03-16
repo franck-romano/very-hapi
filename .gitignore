@@ -1,0 +1,26 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# local environment
+local.env
+save-commands.json
+*.orig
+
+# compiled output
+/dist
+/tmp
+/api/coverage
+
+# dependencies
+/node_modules
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log*
+testem.log
+*.swp
+.idea
+*.iml
+*.DS_Store
